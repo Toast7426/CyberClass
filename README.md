@@ -1,4 +1,4 @@
-# ClassStudio
+# CyberClass
 Include Chinese and English/中英双语
 
 readme/自述文件：
@@ -11,7 +11,7 @@ Chinese/中文：
 
     程序的结构
 
-    ClassStudio由debug程序完成配置任务，由infoDP启动并关联启动其他程序
+    CyberClass由debug程序完成配置任务，由infoDP启动并关联启动其他程序
 
     您可以从本仓库中寻找说明文档，或从此“【哔哩哔哩】 https://b23.tv/UA8Ajyd”寻求帮助
 
@@ -29,7 +29,7 @@ English/英文：
 
     Program structure
 
-    ClassStudio is configured by the debug program, started by infoDP and associated with other programs
+    CyberClass is configured by the debug program, started by infoDP and associated with other programs
 
     You can find the documentation in this repository or seek help from "[Bilibili] https://b23.tv/UA8Ajyd"
 
