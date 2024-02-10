@@ -19,6 +19,8 @@ CyberClass由debug程序完成配置任务，由infoDP启动并关联启动其�
 
 欢迎一切有意向者参与项目的开发和维护
 
+特别感谢：【哔哩哔哩】 耳朵同 提供创意
+
 另请参阅各版本readme及log
 
 ### English/英文：
@@ -40,5 +42,7 @@ You can find the documentation in this repository or seek help from "[Bilibili] 
 ---
 
 All interested parties are welcome to participate in the development and maintenance of the project
+
+Special thanks to: Bilibili erduotong for providing creativity
 
 See also the versions readme and log
