@@ -200,7 +200,7 @@ void setPos()
 	cin >> window_high;
 	int window_wide;
 	int window_Xpos;
-	window_wide = 2 * lesson_num * window_high + window_high;
+	window_wide = 3 * lesson_num * window_high + window_high;
 	window_Xpos = screen_wide / 2 - window_wide / 2;
 	fileManager(1, window_wide);
 	fileManager(2, window_Xpos);
@@ -226,11 +226,11 @@ struct ms_RGB {
 	short green;
 	short blue;
 };//颜色结构体
-const struct ms_RGB C_VISUALSTUDIO_PURPLE = { 90, 45, 144 };
-const struct ms_RGB C_PYTHON_YELLO = { 255, 215, 72 };
-const struct ms_RGB C_WINDOWS_BLUE = { 1, 164, 239 };
-const struct ms_RGB C_BLENDER_ORANGE = { 244, 121, 43 };
-const struct ms_RGB C_MIKU_GREEN = { 39, 197, 187 };
+const struct ms_RGB C_VISUALSTUDIO_PURPLE = { 0x9c, 0x5a, 0xd1 };
+const struct ms_RGB C_PYTHON_YELLO = { 0xff, 0xde, 0x57 };
+const struct ms_RGB C_WINDOWS_BLUE = { 0x00, 0x78, 0xd7 };
+const struct ms_RGB C_BLENDER_ORANGE = { 0xe8, 0x7d, 0x0d };
+const struct ms_RGB C_MIKU_GREEN = { 0x27, 0xc5, 0xbb };
 void font()
 {
 	int font_size;
@@ -423,7 +423,7 @@ void editTimeTable()
 
 void editUpdateTime()
 {
-	cout << "Enter TPS(ms / time)(50~9999ms)" << endl;
+	cout << "Enter TPS(ms / once)(50~9999ms)" << endl;
 	int time_tps;
 	cin >> time_tps;
 	if (valueIfAllow(50, 9999, time_tps))
@@ -453,7 +453,7 @@ void addToStartup()
 
 void foreground()
 {
-	cout << "Set foreground(y/n)";
+	cout << "Set foreground(y/n)" << endl;
 	char if_foreground;
 	cin >> if_foreground;
 	if (if_foreground == 'y')
