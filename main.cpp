@@ -1,4 +1,4 @@
-#include <Windows.h>
+#include <windows.h>
 #include "read_ifs.h"
 #include "display.h"
 #include "date_time.h"
@@ -63,7 +63,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     else
     {
         style = WS_EX_LAYERED | WS_EX_TOOLWINDOW;
-    }
+    }//是否置于顶层
     HWND hwnd = CreateWindowEx(
         style,
         CLASS_NAME,
@@ -77,22 +77,17 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         NULL,
         hInstance,
         NULL);
-
     //AllowSetForegroundWindow(hwnd);
-
     // 设置窗口透明度
     SetLayeredWindowAttributes(hwnd, RGB(0, 0, 0), 0, LWA_COLORKEY);
 
-    ShowWindow(hwnd, nCmdShow);
-    UpdateWindow(hwnd);
-
     // 消息循环
-    MSG msg = { 0 };
-    while (GetMessage(&msg, NULL, 0, 0))
+    MSG msg;
+    while (GetMessage(&msg, NULL, NULL, NULL))
     {
         TranslateMessage(&msg);
         DispatchMessage(&msg);
         Sleep(read(10));
     }
-    return 0;
+    return (int) msg.wParam;
 }
