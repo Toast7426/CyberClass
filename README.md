@@ -9,7 +9,7 @@
 
 #### 程序的结构
 
-CyberClass由debug程序完成配置任务，由infoDP启动并关联启动其他程序
+CyberClass由console程序完成配置任务，由infoDP启动并关联启动其他程序
 
 #### 使用说明
 
@@ -33,7 +33,7 @@ You can get the packaged program from Release, or compile it from source code (I
 
 #### Program structure
 
-CyberClass is configured by the debug program, started by infoDP and associated with other programs
+CyberClass is configured by the console program, started by infoDP and associated with other programs
 
 #### Instructions
 
