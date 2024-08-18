@@ -7,11 +7,6 @@
 
 > Include Chinese and English/中英双语
 
-<!-- TOC -->
-  * [Chinese/中文](#Chinese/中文：)
-  * [English/英文](#English/英文：)
-<!-- TOC -->
-
 ### Chinese/中文：
 
 这是一个有实用性，可运行在班级公共计算机上的程序（组）。它由“InfoDP”及一系列套件组合而成。有了它，我们可以完成查看课表等其他事情。
