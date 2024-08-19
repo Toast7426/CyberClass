@@ -11,6 +11,8 @@
 
 这是一个有实用性，可运行在班级公共计算机上的程序（组）。它由“InfoDP”及一系列套件组合而成。有了它，我们可以完成查看课表等其他事情。
 
+使用C++/Win32API编写，小、轻、快是它的特点
+
 #### 如何获得
 
 您可以从Release处获得打包完成的程序，或从源代码编译启动(我使用Visual Studio 2019版本)。
@@ -38,6 +40,8 @@ CyberClass由console程序完成配置任务，由infoDP启动并关联启动其
 >*This part may be translated by a machine*
 
 This is a practical program (group) that can be run on a class public computer. It is a combination of "InfoDP" and a series of packages. With it, we can do other things like check the class schedule.
+
+Written using C++/Win32API, small, light, fast is its features
 
 #### How to get it
 
