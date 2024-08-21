@@ -8,30 +8,7 @@
 #include "output2cmd.h"
 using namespace std;
 
-/*void sign()
-{
-	cout << " ______                   ____                   __________       __________"
-		<< "\n";
-	cout << "|\\_   _\\                 |\\  _\\                 |\\  ______ \\     |\\  ______ \\"
-		<< "\n";
-	cout << "\\|_\\  \\|                  \\\\ \\|                  \\\\ \\    \\\\ \\     \\\\ \\    \\\\ \\"
-		<< "\n";
-	cout << "   \\\\  \\    _  ______    __\\\\ \\__   ________      \\\\ \\    \\\\ \\     \\\\ \\___// /"
-		<< "\n";
-	cout << "    \\\\  \\   |\\/ ____ \\   \\|_|\\ \\_| |\\  ____ \\      \\\\ \\    \\\\ \\     \\\\  ____/"
-		<< "\n";
-	cout << "     \\\\  \\   \\\\ \\  \\\\ \\      \\\\ \\   \\\\ \\  \\\\ \\      \\\\ \\    \\\\ \\     \\\\ \\___|"
-		<< "\n";
-	cout << "      \\\\  \\_  \\\\ \\  \\\\ \\      \\\\ \\   \\\\ \\__\\\\ \\      \\\\ \\___// /      \\\\ \\"
-		<< "\n";
-	cout << "     |\\_____\\  \\\\_\\  \\\\_\\      \\\\_\\   \\\\_______\\      \\\\_\\____/        \\\\_\\"
-		<< "\n";
-	cout << "     \\|_____|   \\|_|  \\|_|      \\|_|   \\|_______|      \\|_____|         \\|_|"
-		<< "\n";
-}*/
-
-void ExSign()
-{
+void ExSign() {
 	Output(" ______                   ____                   __________       __________", SIGN_FONT);
 	Output("|\\_   _\\                 |\\  _\\                 |\\  ______ \\     |\\  ______ \\", SIGN_FONT);
 	Output("\\|_\\  \\|                  \\\\ \\|                  \\\\ \\    \\\\ \\     \\\\ \\    \\\\ \\", SIGN_FONT);
@@ -43,9 +20,8 @@ void ExSign()
 	Output("     \\|_____|   \\|_|  \\|_|      \\|_|   \\|_______|      \\|_____|         \\|_|", SIGN_FONT);
 }
 
-void information()
-{
-	Output("Vision1.2.007[Beta]", REMIND_FONT);
+void PrintInformation() {
+	Output("Vision1.2.008", REMIND_FONT);
 	Output("GitHub:", HIGHLIGHT_FONT);
 	Output("https://github.com/Toast7426/CyberClass", URL_FONT);
 	Output("哔哩哔哩::", HIGHLIGHT_FONT);
@@ -53,8 +29,7 @@ void information()
 	Output("Bugs?Can't run?How about Windows8 compatibility mode?", REMIND_FONT);
 }
 
-void chooseFunction()
-{
+void ChooseFunction() {
 	while (true)
 	{
 		Output("/*================================================================*/", REMIND_FONT);
@@ -73,57 +48,75 @@ void chooseFunction()
 		Output("/*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */", REMIND_FONT);
 		string inputNum_str;
 		cin >> inputNum_str;
-		int inputNum = atoi(inputNum_str.c_str());
+		int inputNum = atoi(inputNum_str.c_str());  // 转换以防止输入如"a"引发的后果
 		switch (inputNum)
 		{
 		case (0):
 		{
-			information();
+			PrintInformation();
 			break;
 		}
 		case (1):
 		{
-			init();
+			Init();
 			break;
 		}
 		case (2):
 		{
-			setPos();
+			SetPos();
 			break;
 		}
 		case (3):
 		{
-			alphaValue();
+			SetAlphaValue();
 			break;
 		}
 		case (4):
 		{
-			font();
+			SetFont();
 			break;
 		}
 		case (5):
 		{
-			editCourseTable();
+			int dayOfWeek = 1;  // 与sequence共同定位正在编辑的课程
+			int sequence = 1;  // 与dayOfWeek共同定位正在编辑的课程
+			bool con/*continue*/ = true;  // con为true,则持续编辑课表
+			while (con)
+			{
+				EditCourseTable(&dayOfWeek, &sequence, &con);  // 重逻辑循环
+			}
 			break;
 		}
 		case (6):
 		{
-			editTimeTable();
+			int dayOfWeek;  // 与sequence共同定位正在编辑的课程
+			int sequence = 1;  // 与dayOfWeek共同定位正在编辑的课程
+			bool con/*continue*/ = true;  // con为true,则持续编辑时间表
+			Output("Enter 'dayOfWeek'", HIGHLIGHT_FONT);
+			cin >> dayOfWeek;
+			if (!IfValueAllow(1, 7, dayOfWeek))
+			{
+				dayOfWeek = 1;
+			}
+			while (con)
+			{
+				EditTimeTable(&dayOfWeek, &sequence, &con);  // 重逻辑循环
+			}
 			break;
 		}
 		case (7):
 		{
-			editRefreshTime();
+			EditRefreshTime();
 			break;
 		}
 		case (8):
 		{
-			addToStartup();
+			AddToStartup();
 			break;
 		}
 		case (9):
 		{
-			foreground();
+			SetForeground();
 			break;
 		}
 		case (10):
@@ -139,8 +132,7 @@ void chooseFunction()
 	}
 }
 
-bool valueIfAllow(int min, int max, int input)
-{
+bool IfValueAllow(const int min, const int max, const int input) {
 	if (input >= min && input <= max)
 	{
 		return true;
@@ -152,30 +144,29 @@ bool valueIfAllow(int min, int max, int input)
 	}
 }
 
-void init()
-{
+void Init() {
 	Output("To init 'properties'/'timetable'/'classschedule'?(p/t/c)", REMIND_FONT);
 	Output("Press any other key to cancel", REMIND_FONT);
-	char init_file;
-	cin >> init_file;
-	if (init_file == 'P' || init_file == 'p')
+	char fileToInit;
+	cin >> fileToInit;
+	if (fileToInit == 'P' || fileToInit == 'p')
 	{
 		fstream ofsP("DB_properties.txt", ios::out);
-		ofsP << "0850";//窗口宽_l1
-		ofsP << "0375";//X坐标_l2
-		ofsP << "0050";//窗口高_l3
-		ofsP << "0008";//每日课程_l4
-		ofsP << "0255";//透明度_l5
-		ofsP << "0034";//字体_l6
-		ofsP << "0200";//字体颜色R_l7
-		ofsP << "0200";//字体颜色G_l8
-		ofsP << "0255";//字体颜色B_l9
-		ofsP << "0200";//刷新间隔_l10
-		ofsP << "0000";//窗口前置_l11
+		ofsP << "0850";  // 窗口宽_l1
+		ofsP << "0375";  // X坐标_l2
+		ofsP << "0050";  // 窗口高_l3
+		ofsP << "0008";  // 每日课程_l4
+		ofsP << "0255";  // 透明度_l5
+		ofsP << "0034";  // 字体_l6
+		ofsP << "0200";  // 字体颜色R_l7
+		ofsP << "0200";  // 字体颜色G_l8
+		ofsP << "0255";  // 字体颜色B_l9
+		ofsP << "0200";  // 刷新间隔_l10
+		ofsP << "0000";  // 窗口前置_l11
 		ofsP.close();
-		cout << "Successful!" << endl;
+		Output("Sucessful!");
 	}
-	else if (init_file == 'T' || init_file == 't')
+	else if (fileToInit == 'T' || fileToInit == 't')
 	{
 		fstream ofsT("DB_timetable.txt", ios::out);
 		char initLine[129] = { " " };
@@ -184,13 +175,13 @@ void init()
 		{
 			for (int j = 0; j <= 128; j++)
 			{
-				ofsT << initLine[j];//防止读取时间表时while卡死等问题
+				ofsT << initLine[j];  // 防止读取时间表时while卡死等问题
 			}
 		}
 		ofsT.close();
 		Output("Successful!");
 	}
-	else if (init_file == 'C' || init_file == 'c')
+	else if (fileToInit == 'C' || fileToInit == 'c')
 	{
 		fstream ofsC("DB_classschedule.txt", ios::out);
 		char initLine[65] = { " " };
@@ -199,7 +190,7 @@ void init()
 		{
 			for (int j = 0; j <= 64; j++)
 			{
-			    ofsC << initLine[j];//防止读取课表时while卡死等问题
+			    ofsC << initLine[j];  // 防止读取课表时while卡死等问题
 			}
 		}
 		ofsC.close();
@@ -211,95 +202,96 @@ void init()
 	}
 }
 
-void setPos()
-{
-	int screen_wide;
-	int lesson_num;
-	int window_high;
+void SetPos() {
+	int screenWide;
+	int lessonCount;
+	int windowHigh;
 	Output("Enter 'screen_wide'(px)", HIGHLIGHT_FONT);
-	cin >> screen_wide;
+	cin >> screenWide;
 	Output("Enter 'number of courses per day'", HIGHLIGHT_FONT);
-	cin >> lesson_num;
+	cin >> lessonCount;
 	Output("Enter 'window_high'(px)", HIGHLIGHT_FONT);
-	cin >> window_high;
-	int window_wide;
-	int window_Xpos;
-	window_wide = 3 * lesson_num * window_high + window_high;
-	window_Xpos = screen_wide / 2 - window_wide / 2;
-	fileManager(1, window_wide);
-	fileManager(2, window_Xpos);
-	fileManager(3, window_high);
-	fileManager(4, lesson_num);
+	cin >> windowHigh;
+	int windowWide;
+	int windowXPos;
+	windowWide = 3 * lessonCount * windowHigh + windowHigh;
+	windowXPos = screenWide / 2 - windowWide / 2;
+	FileManagerDBP_Out(1, windowWide);
+	FileManagerDBP_Out(2, windowXPos);
+	FileManagerDBP_Out(3, windowHigh);
+	FileManagerDBP_Out(4, lessonCount);
 }
 
-void alphaValue()
-{
-	int alpha;
+void SetAlphaValue() {
+	int alphaValue;
 	Output("Enter 'alpha'(0(disable)~255)", HIGHLIGHT_FONT);
-	cin >> alpha;
-	if (valueIfAllow(0, 255, alpha))
+	cin >> alphaValue;
+	if (IfValueAllow(0, 255, alphaValue))
 	{
-		fileManager(5, alpha);
+		FileManagerDBP_Out(5, alphaValue);
 	}
 }
 
-void font()
-{
-	int font_size;
+void SetFont() {
+	int fontSize;
 	Output("Enter 'font_size'", HIGHLIGHT_FONT);
 	Output("Best font size for window height", HIGHLIGHT_FONT);
 	Output("38-50px\t50-70px\t74-100px", HIGHLIGHT_FONT);
-	cin >> font_size;
-	fileManager(6, font_size);
+	cin >> fontSize;
+	FileManagerDBP_Out(6, fontSize);
 
 	Output("Please choose color", HIGHLIGHT_FONT);
 	Output("1.VISUALSTUDIO_PURPLE\t2.PYTHON_YELLO\t3.WINDOWS_BLUE", HIGHLIGHT_FONT);
 	Output("4.BLENDER_ORANGE\t5.MIKU_GREEN", HIGHLIGHT_FONT);
-	int color_num;
-	cin >> color_num;
-	switch (color_num)
+	string colorNum_str;
+	cin >> colorNum_str;
+	int colorNum = atoi(colorNum_str.c_str());  // 转换以防止输入如"a"引发的后果
+	switch (colorNum)
 	{
 	case(1):
 	{
-		fileManager(7, C_VISUALSTUDIO_PURPLE.red);//写入(red)
-		fileManager(8, C_VISUALSTUDIO_PURPLE.green);//写入(green)
-		fileManager(9, C_VISUALSTUDIO_PURPLE.blue);//写入(blue)
+		FileManagerDBP_Out(7, C_VISUALSTUDIO_PURPLE.red);  // 写入(red)
+		FileManagerDBP_Out(8, C_VISUALSTUDIO_PURPLE.green);  // 写入(green)
+		FileManagerDBP_Out(9, C_VISUALSTUDIO_PURPLE.blue);  // 写入(blue)
 		break;
 	}
 	case(2):
 	{
-		fileManager(7, C_PYTHON_YELLO.red);
-		fileManager(8, C_PYTHON_YELLO.green);
-		fileManager(9, C_PYTHON_YELLO.blue);
+		FileManagerDBP_Out(7, C_PYTHON_YELLO.red);
+		FileManagerDBP_Out(8, C_PYTHON_YELLO.green);
+		FileManagerDBP_Out(9, C_PYTHON_YELLO.blue);
 		break;
 	}
 	case(3):
 	{
-		fileManager(7, C_WINDOWS_BLUE.red);
-		fileManager(8, C_WINDOWS_BLUE.green);
-		fileManager(9, C_WINDOWS_BLUE.blue);
+		FileManagerDBP_Out(7, C_WINDOWS_BLUE.red);
+		FileManagerDBP_Out(8, C_WINDOWS_BLUE.green);
+		FileManagerDBP_Out(9, C_WINDOWS_BLUE.blue);
 		break;
 	}
 	case(4):
 	{
-		fileManager(7, C_BLENDER_ORANGE.red);
-		fileManager(8, C_BLENDER_ORANGE.green);
-		fileManager(9, C_BLENDER_ORANGE.blue);
+		FileManagerDBP_Out(7, C_BLENDER_ORANGE.red);
+		FileManagerDBP_Out(8, C_BLENDER_ORANGE.green);
+		FileManagerDBP_Out(9, C_BLENDER_ORANGE.blue);
 		break;
 	}
 	case(5):
 	{
-		fileManager(7, C_MIKU_GREEN.red);
-		fileManager(8, C_MIKU_GREEN.green);
-		fileManager(9, C_MIKU_GREEN.blue);
+		FileManagerDBP_Out(7, C_MIKU_GREEN.red);
+		FileManagerDBP_Out(8, C_MIKU_GREEN.green);
+		FileManagerDBP_Out(9, C_MIKU_GREEN.blue);
+		break;
+	}
+	default:
+	{
 		break;
 	}
 	}
 }
 
-void cursorMove(int* dayOfWeek_p, int* sequence_p, int courses_each_day)
-{
-	if (*sequence_p == courses_each_day)/*将光标移动到下一个*/
+void MoveCursor(int* dayOfWeek_p, int* sequence_p, const int courseCountEachDay) {
+	if (*sequence_p == courseCountEachDay)  /*将光标移动到下一个*/
 	{
 		if (*dayOfWeek_p == 7)
 		{
@@ -317,105 +309,96 @@ void cursorMove(int* dayOfWeek_p, int* sequence_p, int courses_each_day)
 		(*sequence_p)++;
 	}
 }
-void editCourseTable()
-{
-	int dayOfWeek = 1;//与sequence共同定位正在编辑的课程
-	int sequence = 1;//与dayOfWeek共同定位正在编辑的课程
-	bool con/*continue*/ = true;//con为true,则持续编辑课表
-	while (con)
+void EditCourseTable(int* dayOfWeek, int* sequence, bool* con) {
+	Output("- . - . - . - . - . - . - . - .  . - . - . - . - . - . - . - . -", REMIND_FONT);
+	int courseCountEachDay = FileManagerDBP_CoursesEachDay_In();
+	// 读取每日课程
+	string courseName;
+	for (int i = 1; i <= 7/*此处'7'意为一周7天*/; i++)  // 横行（二维表格）
 	{
-		int courses_each_day = fileManagerR(255, NULL, NULL, NULL);
-		//借用fileManageR读取每日课程
-		Output("- . - . - . - . - . - . - . - .  . - . - . - . - . - . - . - . -", REMIND_FONT);
-		string course;
-		for (int i = 1; i <= 7/*此处'7'意为一周7天*/; i++)//横行（二维表格）
+		for (int j = 1; j <= courseCountEachDay; j++)  // 竖行
 		{
-			for (int j = 1; j <= courses_each_day; j++)//竖行
+			FileManagerDBC_In(i, j, &courseName);
+			if (i == *dayOfWeek && j == *sequence && courseName != "null")
 			{
-				fileManagerR(i, j, true, &course);
-				if (i == dayOfWeek && j == sequence && course != "null")
-				{
-					OutputWR(course + "] ", REMIND_FONT);//如果指定的日期和课程正在被打印，在其后添加光标
-				}
-				else if (course == "null")
-				{
-					i = 8;
-					j = courses_each_day + 1;
-					/*当发现DB_classschedule.txt不满七个横行时，退出循环*/
-				}
-				else
-				{
-					OutputWR(course + "  ");
-				}
-				if (j == courses_each_day)
-				{
-					OutputWR("\n");
-				}
+				OutputWR(courseName + "]\t", REMIND_FONT);  // 如果指定的日期和课程正在被打印，在其后添加光标
 			}
-		}
-		//打印课表
-
-		Output("Enter 'course_name' or 'dayOfWeek' or \"quit\" or \"delete\"", HIGHLIGHT_FONT);
-		Output("'course_name' MUST BE 4 BYTES LONG!", REMIND_FONT);
-		string course_changed;
-		cin >> course_changed;
-		//引导输入
-		//接下来进行逻辑处理
-
-		if (course_changed >= "1" && course_changed <= "7")//此时course_changed代表星期
-		{
-			dayOfWeek = atoi(course_changed.c_str());//转换string型到int型
-			Output("Enter 'sequence'", HIGHLIGHT_FONT);
-			cin >> sequence;
-			if (valueIfAllow(1, courses_each_day, sequence) == false)
+			else if (courseName == "null")
 			{
-				sequence = courses_each_day;//防止输入过大数字，引发问题
-				Output("Now,sequence=" + sequence);
-			}
-			Output("Enter 'course'", HIGHLIGHT_FONT);
-			cin >> course_changed;
-
-			if (course_changed == "delete")
-			{
-				course_changed = "    ";
-			    fileManagerR(dayOfWeek, sequence, false, &course_changed);
-				cursorMove(&dayOfWeek, &sequence, courses_each_day);
+				i = 8;
+				j = courseCountEachDay + 1;
+				// 当发现DB_classschedule.txt不满七个横行时，退出循环
 			}
 			else
 			{
-				fileManagerR(dayOfWeek, sequence, false, &course_changed);
-				cursorMove(&dayOfWeek, &sequence, courses_each_day);
+				OutputWR(courseName + "\t");
+			}
+			if (j == courseCountEachDay)
+			{
+				OutputWR("\n");
 			}
 		}
-		//情况一：更改次序，更改课程
+	}
+	// 打印课表
 
-		else if (course_changed == "quit")
+	Output("Enter 'course_name' or 'dayOfWeek' or \"quit\" or \"delete\"", HIGHLIGHT_FONT);
+	Output("'course_name' MUST BE 4 BYTES LONG!", REMIND_FONT);
+	string courseChanged;
+	cin >> courseChanged;
+	// 引导输入
+	// 接下来进行逻辑处理
+
+	if (courseChanged >= "1" && courseChanged <= "7")  // 此时course_changed代表星期
+	{
+		*dayOfWeek = atoi(courseChanged.c_str());  // 转换string型到int型
+		Output("Enter 'sequence'", HIGHLIGHT_FONT);
+		cin >> *sequence;
+		if (IfValueAllow(1, courseCountEachDay, *sequence) == false)
 		{
-			con = false;
+			*sequence = courseCountEachDay;  // 防止输入过大数字，引发问题
+			Output("Now,sequence=" + *sequence);
 		}
-		//情况二：退出
+		Output("Enter 'course'", HIGHLIGHT_FONT);
+		cin >> courseChanged;
 
-		else if (course_changed == "delete")
+		if (courseChanged == "delete")
 		{
-			course_changed = "    ";
-			fileManagerR(dayOfWeek, sequence, false, &course_changed);
-			cursorMove(&dayOfWeek, &sequence, courses_each_day);
+			courseChanged = "    ";
+			FileManagerDBC_Out(*dayOfWeek, *sequence, &courseChanged);
+			MoveCursor(dayOfWeek, sequence, courseCountEachDay);
 		}
-		//情况三：顺序继续后删除
-
 		else
 		{
-			fileManagerR(dayOfWeek, sequence, false, &course_changed);
-			cursorMove(&dayOfWeek, &sequence, courses_each_day);
+			FileManagerDBC_Out(*dayOfWeek, *sequence, &courseChanged);
+			MoveCursor(dayOfWeek, sequence, courseCountEachDay);
 		}
-		//情况四：顺序继续更改课程
 	}
+	// 情况一：更改次序，更改课程
 
+	else if (courseChanged == "quit")
+	{
+		*con = false;
+	}
+	// 情况二：退出
+
+	else if (courseChanged == "delete")
+	{
+		courseChanged = "    ";
+		FileManagerDBC_Out(*dayOfWeek, *sequence, &courseChanged);
+		MoveCursor(dayOfWeek, sequence, courseCountEachDay);
+	}
+	// 情况三：顺序继续后删除
+
+	else
+	{
+		FileManagerDBC_Out(*dayOfWeek, *sequence, &courseChanged);
+		MoveCursor(dayOfWeek, sequence, courseCountEachDay);
+	}
+	// 情况四：顺序继续更改课程
 }
 
-void cursorMove(int* sequence_p, int courses_each_day)
-{
-	if (*sequence_p == courses_each_day)
+void MoveCursor(int* sequence_p, const int courseCountEachDay) {
+	if (*sequence_p == courseCountEachDay)
 	{
 		*sequence_p = 1;
 	}
@@ -424,82 +407,66 @@ void cursorMove(int* sequence_p, int courses_each_day)
 		(*sequence_p)++;
 	}
 }
-void editTimeTable()
-{
-	int dayOfWeek;
-	int sequence = 1;
-	cout << "Enter 'dayOfWeek'" << endl;
-	cin >> dayOfWeek;
-	if (!valueIfAllow(1, 7, dayOfWeek))
+void EditTimeTable(int* dayOfWeek, int* sequence, bool* con) {
+	Output("- . - . - . - . - . - . - . - .  . - . - . - . - . - . - . - . -", REMIND_FONT);
+	Output("Day of week:" + to_string(*dayOfWeek));
+	int courseCountEachDay = FileManagerDBP_CoursesEachDay_In();
+    // 借用fileManageR读取每日课程
+	for (int i = 1; i <= courseCountEachDay; i++)
 	{
-		dayOfWeek = 1;
-	}
-	bool con/*continue*/ = true;//con为true,则持续编辑时间表
-	while (con)
-	{
-		cout << "Day of week:" << dayOfWeek << endl;
-		int courseEachDay = fileManagerR(255, NULL, NULL, NULL);
-        //借用fileManageR读取每日课程
-		Output("- . - . - . - . - . - . - . - .  . - . - . - . - . - . - . - . -", REMIND_FONT);
-		for (int i = 1; i <= courseEachDay; i++)
+		char timeBegin[4];
+		char timeEnd[4];
+		FileManagerDBT_In(*dayOfWeek, i, true, timeBegin);
+		FileManagerDBT_In(*dayOfWeek, i, false, timeEnd);
+		string classTime =
+			"Lesson No." + to_string(i) + ":  " +
+			timeBegin[0] + timeBegin[1] + ":" + timeBegin[2] + timeBegin[3] + "-" +
+			timeEnd[0] + timeEnd[1] + ":" + timeEnd[2] + timeEnd[3];  // Lesson No.1:开始时间-结束时间
+		if (*sequence == i)
 		{
-		    char timeBegin[4];
-			char timeEnd[4];
-			fileManagerT(dayOfWeek, i, true, timeBegin);
-			fileManagerT(dayOfWeek, i, false, timeEnd);
-			string iStr = to_string(i);
-			string classTime =
-				"Lesson No." + iStr + ":  " +
-				timeBegin[0] + timeBegin[1] + ":" + timeBegin[2] + timeBegin[3] + "-" +
-				timeEnd[0] + timeEnd[1] + ":" + timeEnd[2] + timeEnd[3];//Lesson No.1:开始时间-结束时间
-			if (sequence == i)
-			{
-				Output(classTime + "]", REMIND_FONT);
-			}
-			else
-			{
-				Output(classTime);
-			}
-		}
-		Output("Input \"next\" to choose next course,\"quit\" to stop editing", HIGHLIGHT_FONT);
-		Output("Input time(formal) to change the begining time", HIGHLIGHT_FONT);
-		Output("Example:Please write \"07:50\" as \"750\",\"13:55\" as \"1355\"", REMIND_FONT);
-		string timeInput;
-		cin >> timeInput;
-		if (timeInput == "next")
-		{
-			cursorMove(&sequence, courseEachDay);
-		}
-		else if (timeInput == "quit")
-		{
-			con = false;
+			Output(classTime + "]", REMIND_FONT);
 		}
 		else
 		{
-			int timeInput_int;
-			timeInput_int = atoi(timeInput.c_str());
-			fileManagerT(dayOfWeek, sequence, true, timeInput_int);
-			Output("Input ending time", HIGHLIGHT_FONT);
-			cin >> timeInput_int;
-			fileManagerT(dayOfWeek, sequence, false, timeInput_int);
-			cursorMove(&sequence, courseEachDay);
-		}//更改时间表
+			Output(classTime);
+		}
+	}
+	Output("Input \"next\" to choose next course,\"quit\" to stop editing", HIGHLIGHT_FONT);
+	Output("Input time(formal) to change the begining time", HIGHLIGHT_FONT);
+	Output("Example:Please write \"07:50\" as \"750\",\"13:55\" as \"1355\"", REMIND_FONT);
+	string timeInput;
+	cin >> timeInput;
+	if (timeInput == "next")
+	{
+		MoveCursor(sequence, courseCountEachDay);
+	}
+	else if (timeInput == "quit")
+	{
+		*con = false;
+	}
+	else
+	{
+		int timeInput_int;
+		timeInput_int = atoi(timeInput.c_str());
+		FileManagerDBT_Out(*dayOfWeek, *sequence, true, timeInput_int);
+		Output("Input ending time", HIGHLIGHT_FONT);
+		cin >> timeInput_int;
+		FileManagerDBT_Out(*dayOfWeek, *sequence, false, timeInput_int);
+		MoveCursor(sequence, courseCountEachDay);
 	}
 }
 
-void editRefreshTime()
-{
-	Output("Enter Tick_time(ms / once)(200~9999ms)", HIGHLIGHT_FONT);
+void EditRefreshTime() {
+	Output("Enter Tick_time(once / Xs)(2~600s)", HIGHLIGHT_FONT);
 	int time_tt;
 	cin >> time_tt;
-	if (valueIfAllow(200, 9999, time_tt))
+	if (IfValueAllow(2, 600, time_tt))
 	{
-		fileManager(10, time_tt);//逻辑刷新间隔(ms)
+		FileManagerDBP_Out(10, time_tt);  // 逻辑刷新间隔(s)
 	}
 }
 
-void addToStartup()
-{
+void AddToStartup() {
 	Output("Please enter your user name", HIGHLIGHT_FONT);
 	string username;
 	cin >> username;
@@ -514,34 +481,37 @@ void addToStartup()
 	}
 }
 
-void foreground()
-{
+void SetForeground() {
 	Output("Set foreground/Unset foreground(s/u)", HIGHLIGHT_FONT);
-	char if_foreground;
-	cin >> if_foreground;
-	if (if_foreground == 'S' || if_foreground == 's')
+	char foregroundOperation;
+	cin >> foregroundOperation;
+	if (foregroundOperation == 'S' || foregroundOperation == 's')
 	{
-		fileManager(11, 1);
+		FileManagerDBP_Out(11, 1);
 	}
-	else if (if_foreground == 'U' || if_foreground == 'u')
+	else if (foregroundOperation == 'U' || foregroundOperation == 'u')
 	{
-		fileManager(11, 0);
+		FileManagerDBP_Out(11, 0);
 	}
 }
 
-void EndProcess()
-{
+void EndProcess() {
 	Output("End/Restart 'InfoDP'?(e/r)", HIGHLIGHT_FONT);
 	Output("Press any other key to cancel", HIGHLIGHT_FONT);
-	char init_file;
-	cin >> init_file;
-	if (init_file == 'E' || init_file == 'e')
+	char processOperation;
+	cin >> processOperation;
+	if (processOperation == 'E' || processOperation == 'e')
 	{
 	    system("taskkill /f /t /im InfoDP.exe");
 	}
-	else if (init_file == 'R' || init_file == 'r')
+	else if (processOperation == 'R' || processOperation == 'r')
 	{
 		system("taskkill /f /t /im InfoDP.exe");
-		WinExec("InfoDP.exe", SW_SHOW);
+		STARTUPINFO si = { sizeof(si) };
+		PROCESS_INFORMATION pi;
+		TCHAR szCommandLine[] = TEXT("InfoDP");
+		CreateProcess(NULL, szCommandLine, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi);
+		CloseHandle(pi.hProcess);
+		CloseHandle(pi.hThread);
 	}
 }
