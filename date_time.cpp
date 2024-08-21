@@ -1,35 +1,32 @@
 #include <Windows.h>
 
-//读取星期
-int dateRead()
-{
+// 读取星期
+int ReadDate() {
     SYSTEMTIME st;
     GetLocalTime(&st);
-    int tmp = st.wDayOfWeek;
-    if (tmp == 0)
+    int date = st.wDayOfWeek;
+    if (date == 0)
     {
-        return 6;//Sunday
+        return 7;  // Sunday
     }
     else
     {
-        return tmp - 1;//Monday2Saturday
+        return date;  // Monday2Saturday
     }
 }
 
-//读取小时
-int hourRead()
-{
+// 读取小时
+int ReadHour() {
     SYSTEMTIME st;
     GetLocalTime(&st);
-    int tmp = st.wHour;
-    return tmp;
+    int hour = st.wHour;
+    return hour;
 }
 
-//读取分钟
-int minuteRead()
-{
+// 读取分钟
+int ReadMinute() {
     SYSTEMTIME st;
     GetLocalTime(&st);
-    int tmp = st.wMinute;
-    return tmp;
+    int minute = st.wMinute;
+    return minute;
 }
