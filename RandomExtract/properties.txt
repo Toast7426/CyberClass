@@ -1,4 +1,0 @@
-Max Number:
-50
-Font Color:
-white
