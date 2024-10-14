@@ -15,7 +15,16 @@
 
 #### 如何获得
 
-您可以从Release处获得打包完成的程序，或从源代码编译启动(我使用Visual Studio 2019版本)。
+您可以从Release处获得打包完成的程序，或从源代码编译启动(我使用Visual Studio 2019版本)。要获取源代码，请前往分支。
+<details>
+  <summary>分支</summary>
+<!-- TOC -->
+  
+* [InfoDP](https://github.com/Toast7426/CyberClass/tree/InfoDP)
+* [InfoDP_console](https://github.com/Toast7426/CyberClass/tree/InfoDP_console)
+* [Mini_Program](https://github.com/Toast7426/CyberClass/tree/Mini_Program)
+<!-- TOC -->
+</details>
 
 #### 程序的结构
 
@@ -45,7 +54,16 @@ Written using C++/Win32API, small, light, fast is its features
 
 #### How to get it
 
-You can get the packaged program from Release, or compile it from source code (I used the Visual Studio 2019 version).
+You can get the packaged program from Release, or compile it from source code (I used the Visual Studio 2019 version).To get the source code, go to the branch.
+<details>
+  <summary>branches</summary>
+<!-- TOC -->
+  
+* [InfoDP](https://github.com/Toast7426/CyberClass/tree/InfoDP)
+* [InfoDP_console](https://github.com/Toast7426/CyberClass/tree/InfoDP_console)
+* [Mini_Program](https://github.com/Toast7426/CyberClass/tree/Mini_Program)
+<!-- TOC -->
+</details>
 
 #### Program structure
 
