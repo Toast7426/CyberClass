@@ -1,3 +1,6 @@
+# Readme of InfoDP
+> InfoDP.exe的源代码
+## 文件说明
 ### main
 InfoDP主函数所在，包括窗口注册，消息循环，消息处理等
 ### display
