@@ -1,7 +1,7 @@
 # Mini_Program
-## 这里是一些独立于InfoDP的一些小程序
-### RandomExtract
->  随机抽号程序
+## 这里是一些属于InfoDP的小组件
+### RandomExtract (build2)
+> 随机抽号程序
 
 单击窗口任意位置开始抽号，再次单击则停止
 
