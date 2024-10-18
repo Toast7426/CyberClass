@@ -1,3 +1,6 @@
+# Readme of InfoDP_console
+> InfoDP_console.exe的源代码
+## 文件说明
 ### main
 InfoDP_console主函数所在
 ### console
